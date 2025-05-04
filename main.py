@@ -1,8 +1,17 @@
 from fasthtml.common import *
+from models import car_table, house_table
 
 app, rt = fast_app()
 
-# testing git connection
+# TODO
+
+# add all the crud stuff
+
+def demo_cards():
+    stuff_content = ["stuff", "things"]
+    
+    return Div(*[Card(stuff) for stuff in stuff_content])
+
 
 @rt('/')
 def get():
@@ -14,25 +23,12 @@ def get():
                 )
             ),
             Ul(
-                Li(A("Cars", href="/cars")),
+                Li(A("Cars", hx_get="/cars", hx_target="#item-list")),
                 Li(A("House", href="/house"))
             )
         ),
-        Div(
-            P("hello world!", style='text-align: center'), 
-            # style="border: 2px solid black; padding: 10px;"
-        ),
-        Div(
-            Card(
-                "Stuff Stuff"
-                # Header("I'm a header"),
-                # "Body",
-                # Footer("I'm a footer"),
-            ),
-            Card(
-                "stuff stuff stuff"
-            )
-        ),
+        Div(demo_cards(), id="item-list"),
+        
         style="width: 35%; margin: 0 auto;",
         
     )
@@ -40,8 +36,17 @@ def get():
 
 @rt('/cars')
 def get():
-    return Div("Made it to cars")
+    cars = car_table()
+    return list_with_new_button(cars,"description")
+    # return Div(*[Card(f"{car.description}") for car in cars])
 
+
+def list_with_new_button(list_items, display_field:str):
+    cards = [Card(f"{getattr(item, display_field)}") for item in list_items]
+    return Div(
+        *cards,
+        Button("Add")
+    )
 
 
 # def add_parameter(func):
@@ -62,40 +67,3 @@ def get():
 
     
 serve()
-
-
-# def get():
-#     return Container(
-#         Grid(
-#             Div(),
-#             Div(
-#                 Nav(
-#                     Ul(
-#                         Li(
-#                             Strong("Gregslist")
-#                         )
-#                     ),
-#                     Ul(
-#                         Li(A("Cars", href="/cars")),
-#                         Li(A("House", href="/house"))
-#                     )
-#                 )
-#             ),
-#             Div()
-#         ),
-#         Grid(
-#             Div(),
-#             Div(
-#                 P("hello world!"), 
-#                 style="border: 2px solid black; padding: 10px;"
-#             ),
-#             Div()
-#         ),
-#         Card(
-#             Header("I'm a header"),
-#             "Body",
-#             Footer("I'm a footer"),
-#             style="width: 50%; margin: 0 auto;"
-#         )
-        
-#     )
