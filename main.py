@@ -2,6 +2,8 @@ from fasthtml.common import *
 
 app, rt = fast_app()
 
+# testing git connection
+
 @rt('/')
 def get():
     return Container(
