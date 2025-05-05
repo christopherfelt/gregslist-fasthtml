@@ -40,6 +40,9 @@ def get():
     return list_with_new_button(cars,"description")
     # return Div(*[Card(f"{car.description}") for car in cars])
 
+@rt('/new/{type}')
+def get():
+    return new_post_form(type)
 
 def list_with_new_button(list_items, display_field:str):
     cards = [Card(f"{getattr(item, display_field)}") for item in list_items]
@@ -48,6 +51,8 @@ def list_with_new_button(list_items, display_field:str):
         Button("Add")
     )
 
+def new_post_form():
+    return Div("testing")
 
 # def add_parameter(func):
 #     params = []
