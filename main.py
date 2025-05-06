@@ -1,5 +1,5 @@
 from fasthtml.common import *
-from models import car_table, house_table
+from models import car_table, house_table, job_table
 
 app, rt = fast_app()
 
