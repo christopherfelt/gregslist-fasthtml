@@ -9,6 +9,9 @@ class Car:
     make: str
     price: int
     
+    def get_class_name(self):
+        return type(self).__name__
+    
 class House:
     id:int
     description:str
@@ -29,5 +32,9 @@ house_table = db.create(House, pk='id')
 job_table = db.create(Job, pk='id')
 
 if __name__ == "__main__":
-    car_table.insert(Car(description="new stuff", model="taurus", make="ford", price=1000))
-    car_table.insert(Car(description="newer stuff", model="colorado", make="chevy", price=1000))
+    # car_table.insert(Car(description="new stuff", model="taurus", make="ford", price=1000))
+    # car_table.insert(Car(description="newer stuff", model="colorado", make="chevy", price=1000))
+    cars = car_table()[0]
+    print(type(cars).__name__.lower())
+    
+    
