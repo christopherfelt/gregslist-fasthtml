@@ -5,3 +5,5 @@ __pycache__/
 *.py[cod]
 *$py.class
 gregslist_db*
+
+# testing
